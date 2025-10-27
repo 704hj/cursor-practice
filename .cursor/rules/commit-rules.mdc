@@ -47,12 +47,19 @@ Message 앞에 Prefix를 추가하며, Message의 의도를 Prefix를 통해 알
 
 ### 2단계: 사용자가 Y 응답 시
 
+**Windows 환경에서 한글 인코딩 안정성을 위해 다음 방식 사용:**
+
 bash
-git commit -m "[{Prefix}] {Message}
+$env:LANG='ko_KR.UTF-8'; $env:LC_ALL='ko_KR.UTF-8'; git -c core.quotepath=false commit -m "[{Prefix}] {Message}
 
 - {세부내용 1}
 - {세부내용 2}"
-  git push origin {현재 브랜치}
+git push origin {현재 브랜치}
+
+**설명:**
+- `$env:LANG`, `$env:LC_ALL` : 환경 변수를 명시적으로 UTF-8로 설정하여 자식 프로세스의 인코딩 문제 해결
+- `core.quotepath=false` : 한글 경로명 정상 표시
+- PowerShell 네이티브 방식으로 Cursor를 통한 커밋 시 한글 인코딩 안정성 보장
 
 PR 하시겠습니까? (Y/N)
 
