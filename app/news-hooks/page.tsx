@@ -1,6 +1,9 @@
 "use client";
 
 import { useFetchNews, useNewsItem } from "@/src/hooks/useNews";
+import { components } from "@/src/types/api";
+
+type NewsItem = components["schemas"]["NewsItem"];
 
 export default function NewsHooksPage() {
   // openapi.yaml 기반으로 AI가 만든 훅 사용!
@@ -17,7 +20,7 @@ export default function NewsHooksPage() {
       </p>
 
       <div style={{ marginTop: 20 }}>
-        {data?.items?.map((news) => (
+        {data?.items?.map((news: NewsItem) => (
           <div
             key={news.id}
             style={{
